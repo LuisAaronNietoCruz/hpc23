@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    printf("Hola mundo.\n");
+    return 0;
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+unsigned int fibonacci(unsigned int a, unsigned int b){
+    return a+b;
+}
+
+int main(){
+    int nbytes;
+    //representacion numero 13 en binario
+    //MASK = 00000000 00000000 00000000 00000001 &
+    //a_2 =  00000000 00000000 00000000 00001101
+    //
+    //       00000000 00000000 00000000 00000001 -> 1
+
+    //MASK = 00000000 00000000 00000000 00000010 &
+    //a_2 =  00000000 00000000 00000000 00001101
+    //
+    //       00000000 00000000 00000000 00000000 -> 0
+
+    //MASK = 00000000 00000000 00000000 00000100 &
+    //a_2 =  00000000 00000000 00000000 00001101
+    //
+    //       00000000 00000000 00000000 00000100 -> 4
+    //       00000000 00000000 00000000 00000001 -> 1
+
+
+
+    // a_16 = 00 00 00 0D
+    unsigned int a = 13;
+    unsigned int r;
+    // MASK = 00 00 00 01
+    unsigned int MASK = 0x1;
+    unsigned int bytes[32];
+
+
+    /*
+    r = MASK & a;
+    printf("%u\n", r);
+
+    MASK = MASK << 1;
+    r = MASK & a;
+    r = r >> 1;
+    printf("%u\n",r);
+
+    MASK = MASK << 1;
+    r = MASK & a;
+    r = r >> 2;
+    printf("%u\n",r);
+
+*/
+
+    for (int i=0; i <8; i++){
+        if (i > 0){
+            MASK = MASK << 1;
+        }
+        r = MASK & a;
+        r = r >> i;
+        bits[i] = r;
+        //printf("%u\n",r);
+    }
+
+        printf("%u_{10}=",a);
+    for(int i=31: i>=0;i--){
+        printf("%u", bits[i]);
+    }
+        printf("_{2}=0x%X_{16}\n", a);
+
+    //nbytes = sizeof(a);
+    //printf("%i\n", nbytes);
+
+/*
+
+    unsigned int b = 1;
+    unsigned int c;
+    int i, N;
+    N = 100;
+    printf("%u,%u,",a,b);
+    for(i=0;i<N;i++){
+        c = fibonacci(a,b);
+        a = b;
+        b = c;
+        printf("%u,",c);
+    }
+    print("\n");
+    return 0;
+}
+/*
